@@ -1,6 +1,8 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
 
 const app = express()
 const port = process.env.PORT || 3005
@@ -28,7 +30,13 @@ app.put('api/product/:productId', (req, res) => {
 app.delete('api/product/:productId', (req, res) => {
     
 })
+mongoose.connect('mongoose://localhost:27017/laBizcocheteria', (err, res) => {
+    if (err) {
+        return console.log (`Error al conectarse a la base de datos: ${err}`)
+    }
+    console.log('Conexión a la base de datos establecida...')
 
-app.listen(port, () => {
+    app.listen(port, () => {
     console.log(`API REST corriendo en http://localhost:${port}`)
+    })
 })
