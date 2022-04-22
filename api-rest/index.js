@@ -45,9 +45,9 @@ app.put('api/product/:productId', (req, res) => {
 app.delete('api/product/:productId', (req, res) => {
     
 })
-mongoose.connect('mongoose://localhost:27017/laBizcocheteria', (err, res) => {
+mongoose.connect('mongodb://localhost:27017/shop', (err, res) => {
     if (err) {
-        return console.log (`Error al conectarse a la base de datos: ${err}`)
+        return console.log (`Error al conectar a la base de datos: ${err}`)
     }
     console.log('Conexión a la base de datos establecida...')
 
