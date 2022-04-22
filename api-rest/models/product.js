@@ -9,4 +9,4 @@ const ProductSchema = Schema({
     category: { type: String, enum: ['computers', 'phones', 'accesories'] },
     description: String
 })
-module.exports = Smongoose.model('Product',ProductSchema)
+module.exports = mongoose.model('Product',ProductSchema)
