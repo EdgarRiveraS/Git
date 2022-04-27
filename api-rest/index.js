@@ -2,8 +2,8 @@
 const express = require ('express');
 const bodyParser = require ('body-parser');
 const mongoose = require ('mongoose');
-const Products = require ('./models/product.js');
-var connec = 'DklEdd@cluster0';
+const Products = require ('./models/product');
+var connec = 'DklEdd';
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -15,7 +15,7 @@ Products.find({},(err, products)=>{
         if(err) return res.status(500).send({message: `Error al realizar la petición: ${err}`})
         if(!products) return res.status(404).send({message: 'No existen productos'})
 
-        res.send(200, { products })
+        res.status(200).send({products})
     })
 })
 
@@ -30,11 +30,11 @@ app.get('/api/product/:productId',(req,res) => {
     })
 })
 
-app.post('api/product', (req, res) => {
-    console.log('POST /api/product')
+app.post ('api/product', (req, res) => {
+    console.log('POST/api/product')
     console.log(req.body)
     
-    let product = new Products()
+    let product = new Products();
     product.name = req.body.name;
     product.picture = req.body.picture;
     product.price = req.body.price;
@@ -56,7 +56,7 @@ app.delete('api/product/:productId', (req, res) => {
     
 })
 
-mongoose.connect(`mongodb+srv://shop:${connec}.srbdh.mongodb.net/shop?retryWrites=true&w=majority`, (err, res) => {
+mongoose.connect(`mongodb+srv://shop:${connec}@cluster0.srbdh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, (err, res) => {
     if (err) {
         return console.log (`Error al conectar a la base de datos: ${err}`)
     }
